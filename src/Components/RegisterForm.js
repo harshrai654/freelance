@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Form, Input, Alert, Select } from "antd";
+import utils from "../utils";
 
 const { Option } = Select;
 
@@ -26,6 +27,28 @@ const RegisterForm = (props) => {
               form.resetFields();
 
               //Register user
+              const onRegister = utils.register(values);
+              if (onRegister) {
+                onRegister
+                  .then((res) => {
+                    setConfirmLoading(false);
+                    if (res.status == 400) {
+                      setError(true);
+                    } else {
+                      const data = res.data;
+                      if (data.error) {
+                        setError(true);
+                      } else {
+                        setError(false);
+                        props.handleClose();
+                      }
+                    }
+                  })
+                  .catch((err) => {
+                    setError(true);
+                    setConfirmLoading(false);
+                  });
+              }
             })
             .catch((info) => {
               console.log("Validate Failed:", info);
@@ -36,12 +59,48 @@ const RegisterForm = (props) => {
         <br />
         <Form form={form} name="reg">
           <Form.Item
-            label="Name"
-            name="name"
+            label="First Name"
+            name="first_name"
             rules={[
               {
                 required: true,
-                message: "Please input your name!",
+                message: "Please input your First name!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Last Name"
+            name="last_name"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Last name!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Mobile number"
+            name="mobile"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Mobile number!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Ethereum Address"
+            name="ethereum_address"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Ethereum Wallet Address!",
               },
             ]}
           >
@@ -66,7 +125,7 @@ const RegisterForm = (props) => {
           </Form.Item>
           <Form.Item
             label="Password"
-            name="pass"
+            name="password"
             rules={[
               {
                 required: true,
@@ -119,8 +178,8 @@ const RegisterForm = (props) => {
             rules={[{ required: true, message: "Please select a role" }]}
           >
             <Select placeholder="Select your role">
-              <Option value={0}>FreeLancer</Option>
-              <Option value={1}>Employer</Option>
+              <Option value={1}>FreeLancer</Option>
+              <Option value={2}>Employer</Option>
             </Select>
           </Form.Item>
         </Form>

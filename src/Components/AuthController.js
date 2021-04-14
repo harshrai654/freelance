@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Space, Button } from "antd";
 import AuthForm from "./AuthForm";
 import RegisterForm from "./RegisterForm";
+import utils from "../utils";
 
 const AuthController = (props) => {
   const [userType, setUserType] = useState(0);
@@ -9,7 +10,15 @@ const AuthController = (props) => {
   return (
     <Space>
       {props.isLoggedIn ? (
-        <Button type="primary">Logout</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            utils.logout();
+            props.setToken(null);
+          }}
+        >
+          Logout
+        </Button>
       ) : (
         <Space>
           <Button type="primary" onClick={() => setUserType(1)}>
@@ -22,6 +31,7 @@ const AuthController = (props) => {
             type={userType}
             handleClose={() => setUserType(0)}
             setRegisterFormState={setRegisterFormState}
+            setToken={props.setToken}
           />
           <RegisterForm
             registerFormState={registerFormState}

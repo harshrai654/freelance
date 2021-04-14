@@ -8,7 +8,13 @@ const Header = (props) => {
       ghost={false}
       onBack={() => window.history.back()}
       title="Freelance"
-      extra={[<AuthController key={0} isLoggedIn={props.isLoggedIn} />]}
+      extra={[
+        <AuthController
+          key={0}
+          setToken={props.setToken}
+          isLoggedIn={props.isLoggedIn}
+        />,
+      ]}
     />
   );
 };

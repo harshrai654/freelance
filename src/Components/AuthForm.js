@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal, Button, Form, Input, Alert } from "antd";
+import utils from "../utils";
 
 const AuthForm = (props) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -22,7 +23,29 @@ const AuthForm = (props) => {
               setConfirmLoading(true);
               form.resetFields();
 
-              //Send Login data
+              const onLogin = utils.login(props.type, values);
+              if (onLogin) {
+                onLogin
+                  .then((res) => {
+                    setConfirmLoading(false);
+                    if (res.status == 400) setError(true);
+                    else {
+                      const data = res.data;
+                      if (data.error) {
+                        setError(true);
+                      } else {
+                        setError(false);
+                        utils.saveToken({ token: data.data.token });
+                        props.setToken(data.data.token);
+                        props.handleClose();
+                      }
+                    }
+                  })
+                  .catch((err) => {
+                    setError(true);
+                    setConfirmLoading(false);
+                  });
+              }
             })
             .catch((info) => {
               console.log("Validate Failed:", info);
@@ -47,7 +70,7 @@ const AuthForm = (props) => {
           </Form.Item>
           <Form.Item
             label="Password"
-            name="pass"
+            name="password"
             rules={[
               {
                 required: true,
