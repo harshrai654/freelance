@@ -32,6 +32,7 @@ const AuthController = (props) => {
             handleClose={() => setUserType(0)}
             setRegisterFormState={setRegisterFormState}
             setToken={props.setToken}
+            setUser={props.setUser}
           />
           <RegisterForm
             registerFormState={registerFormState}

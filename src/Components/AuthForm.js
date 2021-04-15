@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal, Button, Form, Input, Alert } from "antd";
+import jwt from "jsonwebtoken";
 import utils from "../utils";
 
 const AuthForm = (props) => {
@@ -35,8 +36,10 @@ const AuthForm = (props) => {
                         setError(true);
                       } else {
                         setError(false);
-                        utils.saveToken({ token: data.data.token });
+                        const user = jwt.decode(data.data.token);
+                        utils.saveToken({ token: data.data.token, user });
                         props.setToken(data.data.token);
+                        props.setUser(user);
                         props.handleClose();
                       }
                     }

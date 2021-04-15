@@ -12,6 +12,7 @@ const Header = (props) => {
         <AuthController
           key={0}
           setToken={props.setToken}
+          setUser={props.setUser}
           isLoggedIn={props.isLoggedIn}
         />,
       ]}

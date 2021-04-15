@@ -21,10 +21,12 @@ const utils = {
 
     return url ? axios.post(url, data).then((res) => res) : null;
   },
-  saveToken: ({ token }) => {
+  saveToken: ({ token, user }) => {
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
   },
   getToken: () => localStorage.getItem("token"),
+  getUser: () => JSON.parse(localStorage.getItem("user")),
   logout: () => localStorage.removeItem("token"),
 
   fetchProjects: (token) =>
