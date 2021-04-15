@@ -28,7 +28,7 @@ const AuthForm = (props) => {
                 onLogin
                   .then((res) => {
                     setConfirmLoading(false);
-                    if (res.status == 400) setError(true);
+                    if (res.status === 400) setError(true);
                     else {
                       const data = res.data;
                       if (data.error) {

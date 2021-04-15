@@ -32,7 +32,7 @@ const RegisterForm = (props) => {
                 onRegister
                   .then((res) => {
                     setConfirmLoading(false);
-                    if (res.status == 400) {
+                    if (res.status === 400) {
                       setError(true);
                     } else {
                       const data = res.data;

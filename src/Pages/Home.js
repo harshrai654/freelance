@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Row, Col } from "antd";
 import { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Header from "../Components/Header";
@@ -14,14 +14,20 @@ const Home = () => {
         <Header isLoggedIn={token} setToken={setToken} />
       </Row>
       <Row>
-        <Switch>
-          <Route exact path="/">
-            {token ? <Redirect to="/projects" /> : <WelcomePage />}
-          </Route>
-          <Route exact path="/projects">
-            {token ? <ProjectsPage /> : <Redirect to="/" />}
-          </Route>
-        </Switch>
+        <Col span={24}>
+          <Switch>
+            <Route exact path="/">
+              {token ? <Redirect to="/projects" /> : <WelcomePage />}
+            </Route>
+            <Route exact path="/projects">
+              {token ? (
+                <ProjectsPage setToken={setToken} />
+              ) : (
+                <Redirect to="/" />
+              )}
+            </Route>
+          </Switch>
+        </Col>
       </Row>
     </>
   );

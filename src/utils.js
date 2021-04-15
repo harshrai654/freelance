@@ -3,9 +3,9 @@ import axios from "axios";
 const utils = {
   login: (type, data) => {
     let url;
-    if (type == 1) {
+    if (type === 1) {
       url = "/freelancers/login";
-    } else if (type == 2) {
+    } else if (type === 2) {
       url = "/employers/login";
     }
 
@@ -13,9 +13,9 @@ const utils = {
   },
   register: (data) => {
     let url;
-    if (data.role == 1) {
+    if (data.role === 1) {
       url = "/freelancers/register";
-    } else if (data.role == 2) {
+    } else if (data.role === 2) {
       url = "/employers/register";
     }
 
@@ -26,6 +26,15 @@ const utils = {
   },
   getToken: () => localStorage.getItem("token"),
   logout: () => localStorage.removeItem("token"),
+
+  fetchProjects: (token) =>
+    axios
+      .get("/projects", {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => res.data),
 };
 
 export default utils;

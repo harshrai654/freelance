@@ -1,7 +1,38 @@
-const ProjectsPage = () => {
+import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { Row, Col } from "antd";
+import ProjectCard from "../Components/ProjectCard";
+import utils from "../utils";
+
+const ProjectsPage = (props) => {
+  const [projects, setProjects] = useState([]);
+  const token = props.token ? props.token : utils.getToken();
+
+  useEffect(() => {
+    utils
+      .fetchProjects(token)
+      .then((data) => {
+        setProjects(data.data);
+      })
+      .catch((err) => {
+        props.setToken(null);
+        setProjects(null);
+      });
+  }, [token, props]);
+
   return (
     <>
-      <h1>Projects</h1>
+      {projects && Array.isArray(projects) ? (
+        <Row>
+          <Col span={24}>
+            {projects.map((proj) => (
+              <ProjectCard proj={proj} key={proj._id} />
+            ))}
+          </Col>
+        </Row>
+      ) : (
+        <Redirect to="/" />
+      )}
     </>
   );
 };
