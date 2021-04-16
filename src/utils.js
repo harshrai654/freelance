@@ -27,7 +27,10 @@ const utils = {
   },
   getToken: () => localStorage.getItem("token"),
   getUser: () => JSON.parse(localStorage.getItem("user")),
-  logout: () => localStorage.removeItem("token"),
+  logout: () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  },
 
   fetchProjects: (token) =>
     axios
@@ -42,6 +45,28 @@ const utils = {
     axios.post(
       "/projects/create",
       { ...values, employer: user.id },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
+
+  getProjectsList: ({ token, user }) =>
+    axios.post(
+      "/employers/projects",
+      { id: user.id },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
+
+  updateProject: (project, token) =>
+    axios.post(
+      "/projects/update",
+      { ...project, id: project._id },
       {
         headers: {
           Authorization: "Bearer " + token,
