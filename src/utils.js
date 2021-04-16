@@ -37,6 +37,17 @@ const utils = {
         },
       })
       .then((res) => res.data),
+
+  addProject: ({ values, token, user }) =>
+    axios.post(
+      "/projects/create",
+      { ...values, employer: user.id },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
 };
 
 export default utils;

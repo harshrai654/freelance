@@ -22,6 +22,7 @@ const ProjectCard = (props) => {
         {!proj.assigned ? "Available" : "Assigned"}
       </Tag>
       <Tag>{`Amount ₹${proj.amount}`}</Tag>
+      <Tag>{`Duration (Days): ${proj.deadline}`}</Tag>
       <Collapse>
         <Panel header="Project Description" key="1">
           <p>{proj.description}</p>

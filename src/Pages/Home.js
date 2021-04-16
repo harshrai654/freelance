@@ -38,7 +38,7 @@ const Home = () => {
             </Route>
             <Route exact path="/dashboard">
               {token && user.type === "employer" ? (
-                <Dashboard setToken={setToken} />
+                <Dashboard token={token} user={user} setToken={setToken} />
               ) : (
                 <Redirect to="/" />
               )}
