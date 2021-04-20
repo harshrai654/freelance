@@ -1,8 +1,12 @@
+import { Row, Col, Image } from "antd";
+
 const WelcomePage = () => {
   return (
-    <>
-      <h1>Welcome banner</h1>
-    </>
+    <Row>
+      <Col span={24}>
+        <Image src="/banner.png" preview={false} />
+      </Col>
+    </Row>
   );
 };
 

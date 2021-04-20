@@ -7,7 +7,7 @@ const Header = (props) => {
     <PageHeader
       ghost={false}
       onBack={() => window.history.back()}
-      title="Freelance"
+      title="DeLancer"
       extra={[
         <AuthController
           key={0}
