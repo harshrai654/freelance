@@ -1,0 +1,17 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const validator = require('validator')
+
+const employerSchema = new Schema({
+    first_name: {type:String, required:true, trim:true, minlength:3},
+    last_name: {type:String, required:true, trim:true, minlength:3},
+    password: {type:String, required:true, trim:true},
+    email:{type:String, lowercase:true, required:true, unique:true, trim:true, validate:[validator.isEmail, 'Invalid email']},
+    mobile:{type:String, required:true, unique:true, trim:true, validate:[validator.isMobilePhone, 'Invalid mobile']},
+    ethereum_address: {type:String, required:true, trim:true},
+},{
+    timestamps:true,
+})
+
+const Employer = mongoose.model('Employer', employerSchema)
+module.exports = Employer

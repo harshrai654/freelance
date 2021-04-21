@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Collapse } from "antd";
+import { Button, Collapse } from "antd";
 import utils from "../utils";
 import UpdateProject from "./UpdateProject";
 
@@ -31,6 +31,7 @@ const ProjectsAdded = (props) => {
           <Collapse accordion>
             {projectsList.map((project, index) => (
               <Panel header={project.description} key={project._id}>
+                <Button href={`/project/${project._id}`} target="_blank" type="primary">View Applications</Button>
                 <UpdateProject
                   project={project}
                   token={token}

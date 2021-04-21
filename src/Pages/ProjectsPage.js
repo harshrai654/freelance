@@ -7,6 +7,7 @@ import utils from "../utils";
 const ProjectsPage = (props) => {
   const [projects, setProjects] = useState([]);
   const token = props.token ? props.token : utils.getToken();
+  const freelancer = props.freelancer;
 
   useEffect(() => {
     utils
@@ -26,7 +27,7 @@ const ProjectsPage = (props) => {
         <Row>
           <Col span={24}>
             {projects.map((proj) => (
-              <ProjectCard proj={proj} key={proj._id} />
+              <ProjectCard proj={proj} freelancer={freelancer.id} token={token} key={proj._id} />
             ))}
           </Col>
         </Row>

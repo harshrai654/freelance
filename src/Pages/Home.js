@@ -6,6 +6,7 @@ import utils from "../utils";
 import ProjectsPage from "./ProjectsPage";
 import WelcomePage from "./WelcomePage";
 import Dashboard from "./Dashboard";
+import ProjectRequests from "./ProjectRequests";
 
 const Home = () => {
   const [token, setToken] = useState(utils.getToken());
@@ -31,7 +32,7 @@ const Home = () => {
             </Route>
             <Route exact path="/projects">
               {token && user.type === "freelancer" ? (
-                <ProjectsPage setToken={setToken} />
+                <ProjectsPage setToken={setToken} freelancer={user} />
               ) : (
                 <Redirect to="/" />
               )}
@@ -39,6 +40,13 @@ const Home = () => {
             <Route exact path="/dashboard">
               {token && user.type === "employer" ? (
                 <Dashboard token={token} user={user} setToken={setToken} />
+              ) : (
+                <Redirect to="/" />
+              )}
+            </Route>
+            <Route exact path="/project/:id">
+            {token && user.type === "employer" ? (
+               <ProjectRequests token={token} setToken={setToken} employer={user}/>
               ) : (
                 <Redirect to="/" />
               )}

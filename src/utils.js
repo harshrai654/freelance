@@ -73,6 +73,25 @@ const utils = {
         },
       }
     ),
+  
+  applyProject: (project, freelancer, token)=>
+      axios.post(
+        "/apply/create",
+        {project: project, freelancer: freelancer},
+        {
+          headers:{
+            Authorization: "Bearer "+token
+          },
+        }
+      ),
+  fetchApplyRequests: (projectID, token)=>
+        axios.get(
+          "/projects/apply/"+projectID,{
+            headers:{
+              Authorization: "Bearer "+token,
+            },
+          }
+        ),
 };
 
 export default utils;
