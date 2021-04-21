@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "antd";
-import ProjectCard from "../Components/ProjectCard";
-import utils from "../utils";
+import ProjectCard from "../../Components/Freelancer/ProjectCard";
+import utils from "../../utils";
 
-const FreelancerCompletedProjects = (props) => {
+const ProjectsPage = (props) => {
   const [projects, setProjects] = useState([]);
   const token = props.token ? props.token : utils.getToken();
   const freelancer = props.freelancer;
 
   useEffect(() => {
     utils
-      .getFreelancerProjects(freelancer.id, token)
+      .fetchProjects(token)
       .then((data) => {
-        setProjects(data.data.filter(proj=>proj.status==="COMPLETED"));
+        setProjects(data.data.filter(proj=>proj.assigned === false));
       })
       .catch((err) => {
-        props.setToken(null);
+        props.setUserData({ user: null, token: null });
+        utils.logout();
         setProjects(null);
       });
   }, [token, props]);
@@ -27,7 +28,12 @@ const FreelancerCompletedProjects = (props) => {
         <Row>
           <Col span={24}>
             {projects.map((proj) => (
-              <ProjectCard proj={proj} freelancer={freelancer.id} token={token} key={proj._id} />
+              <ProjectCard
+                proj={proj}
+                freelancer={freelancer.id}
+                token={token}
+                key={proj._id}
+              />
             ))}
           </Col>
         </Row>
@@ -38,4 +44,4 @@ const FreelancerCompletedProjects = (props) => {
   );
 };
 
-export default FreelancerCompletedProjects;
+export default ProjectsPage;

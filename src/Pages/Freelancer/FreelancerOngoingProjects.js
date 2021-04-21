@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "antd";
-import ProjectCard from "../Components/ProjectCard";
-import utils from "../utils";
+import ProjectCard from "../../Components/Freelancer/ProjectCard";
+import utils from "../../utils";
 
-const ProjectsPage = (props) => {
+const FreelancerOngoingProjects = (props) => {
   const [projects, setProjects] = useState([]);
   const token = props.token ? props.token : utils.getToken();
   const freelancer = props.freelancer;
 
   useEffect(() => {
     utils
-      .fetchProjects(token)
+      .getFreelancerProjects(freelancer.id, token)
       .then((data) => {
-        setProjects(data.data.filter(proj=>proj.assigned === false));
+        setProjects(data.data.filter(proj=>proj.status === "PENDING"));
       })
       .catch((err) => {
         props.setToken(null);
@@ -38,4 +38,4 @@ const ProjectsPage = (props) => {
   );
 };
 
-export default ProjectsPage;
+export default FreelancerOngoingProjects;

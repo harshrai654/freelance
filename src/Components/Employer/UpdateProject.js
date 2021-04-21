@@ -1,11 +1,53 @@
 import { useState } from "react";
-import { Form, Input, Button, InputNumber, Spin, Alert, Tag } from "antd";
-import { MinusCircleOutlined } from "@ant-design/icons";
-import utils from "../utils";
+import {
+  Form,
+  Input,
+  Row,
+  Button,
+  Divider,
+  InputNumber,
+  Spin,
+  Alert,
+  Tag,
+  Col,
+  Modal,
+} from "antd";
+import {
+  MinusCircleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
+import utils from "../../utils";
+
+const { confirm } = Modal;
 
 const UpdateProject = (props) => {
   let { project, token } = props;
   const [loading, setLoading] = useState(-1);
+
+  const showConfirm = () => {
+    confirm({
+      icon: <ExclamationCircleOutlined />,
+      content: "Are you sure you want to Delete this project?",
+      okText: "Yes",
+      cancelText: "No",
+      onOk() {
+        setLoading(0);
+        utils
+          .deleteProject({ id: project._id, token })
+          .then(() => {
+            props.deleteProject();
+            setLoading(3);
+          })
+          .catch((err) => {
+            setLoading(2);
+          });
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+
   return (
     <>
       {loading === 1 && (
@@ -20,6 +62,14 @@ const UpdateProject = (props) => {
         <Alert
           message="Something went wrong!"
           type="error"
+          closable
+          onClose={() => setLoading(-1)}
+        />
+      )}
+      {loading === 3 && (
+        <Alert
+          message="Project deleted successfully!"
+          type="success"
           closable
           onClose={() => setLoading(-1)}
         />
@@ -92,15 +142,29 @@ const UpdateProject = (props) => {
           />
         </Form.Item>
         <br />
+        <Divider />
         <Form.Item>
           {loading && (
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={project.assigned}
-            >
-              Submit
-            </Button>
+            <Row>
+              <Col span={12}>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  disabled={project.assigned}
+                >
+                  Submit
+                </Button>
+              </Col>
+              <Col span={12}>
+                <Button
+                  type="danger"
+                  onClick={showConfirm}
+                  disabled={project.assigned}
+                >
+                  Delete Project
+                </Button>
+              </Col>
+            </Row>
           )}
           {!loading && <Spin />}
         </Form.Item>

@@ -14,7 +14,7 @@ const AuthController = (props) => {
           type="primary"
           onClick={() => {
             utils.logout();
-            props.setToken(null);
+            props.setUserData({ user: null, token: null });
           }}
         >
           Logout
@@ -31,8 +31,7 @@ const AuthController = (props) => {
             type={userType}
             handleClose={() => setUserType(0)}
             setRegisterFormState={setRegisterFormState}
-            setToken={props.setToken}
-            setUser={props.setUser}
+            setUserData={props.setUserData}
           />
           <RegisterForm
             registerFormState={registerFormState}

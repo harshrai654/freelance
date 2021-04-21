@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { Row, Col } from "antd";
-import RequestCard from "../Components/RequestCard";
-import utils from "../utils";
+import RequestCard from "../../Components/Employer/RequestCard";
+import utils from "../../utils";
 
 const ProjectRequests = (props) => {
   const [requests, setRequests] = useState([]);
   const token = props.token ? props.token : utils.getToken();
   const employer = props.employer;
-  const {id} = useParams();
+  const { id } = useParams();
   useEffect(() => {
     utils
       .fetchApplyRequests(id, token)
@@ -16,11 +16,11 @@ const ProjectRequests = (props) => {
         setRequests(res.data.data);
       })
       .catch((err) => {
-        console.log(err)
-        props.setToken(null);
+        console.log(err);
+        props.setUserData({ user: null, token: null });
         setRequests(null);
       });
-  }, [token, props]);
+  }, [token]);
 
   return (
     <>

@@ -6,13 +6,11 @@ const Header = (props) => {
   return (
     <PageHeader
       ghost={false}
-      onBack={() => window.history.back()}
       title="DeLancer"
       extra={[
         <AuthController
           key={0}
-          setToken={props.setToken}
-          setUser={props.setUser}
+          setUserData={props.setUserData}
           isLoggedIn={props.isLoggedIn}
         />,
       ]}

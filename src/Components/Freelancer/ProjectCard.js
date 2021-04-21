@@ -3,7 +3,7 @@ import {
   ExclamationCircleOutlined,
   CheckCircleOutlined,
 } from "@ant-design/icons";
-import utils from "../utils";
+import utils from "../../utils";
 
 const { Panel } = Collapse;
 const ProjectCard = (props) => {
@@ -11,14 +11,14 @@ const ProjectCard = (props) => {
   const freelancer = props.freelancer;
   const token = props.token;
 
-  const apply = (projectID)=>{
+  const apply = (projectID) => {
     console.log(projectID, freelancer, token);
     utils
       .applyProject(projectID, freelancer, token)
-      .then((response)=>{
+      .then((response) => {
         console.log(response);
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -42,9 +42,13 @@ const ProjectCard = (props) => {
       <Collapse>
         <Panel header="Project Description" key="1">
           <p>{proj.description}</p>
-          {!proj.assigned &&
-          <Button type="primary" onClick={(e)=>apply(proj._id)}>Apply</Button>
-          }
+          <Button
+            type="primary"
+            disabled={proj.assigned}
+            onClick={(e) => apply(proj._id)}
+          >
+            Apply
+          </Button>
         </Panel>
       </Collapse>
     </Card>

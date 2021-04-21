@@ -38,8 +38,7 @@ const AuthForm = (props) => {
                         setError(false);
                         const user = jwt.decode(data.data.token);
                         utils.saveToken({ token: data.data.token, user });
-                        props.setToken(data.data.token);
-                        props.setUser(user);
+                        props.setUserData({ token: data.data.token, user });
                         props.handleClose();
                       }
                     }
