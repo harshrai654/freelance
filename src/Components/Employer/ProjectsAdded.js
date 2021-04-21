@@ -31,19 +31,24 @@ const ProjectsAdded = (props) => {
           <Collapse accordion>
             {projectsList.map((project, index) => (
               <Panel header={project.description} key={project._id}>
-                <Button
+                {/* <Button
                   href={`/project/${project._id}`}
                   target="_blank"
                   type="primary"
                 >
                   View Applications
-                </Button>
+                </Button> */}
                 <UpdateProject
                   project={project}
                   token={token}
                   setProject={(project) => {
                     let newProductList = [...projectsList];
                     newProductList[index] = project;
+                    setProjectsList(newProductList);
+                  }}
+                  deleteProject={() => {
+                    let newProductList = [...projectsList];
+                    newProductList.splice(index, 1);
                     setProjectsList(newProductList);
                   }}
                 />
