@@ -3,7 +3,7 @@ import {
   ExclamationCircleOutlined,
   CheckCircleOutlined,
 } from "@ant-design/icons";
-import utils from "../utils";
+import utils from "../../utils";
 
 const { Panel } = Collapse;
 const ProjectCard = (props) => {

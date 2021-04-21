@@ -1,6 +1,6 @@
 import { Form, Input, Spin, InputNumber, Button, Alert } from "antd";
 import { useState } from "react";
-import utils from "../utils";
+import utils from "../../utils";
 
 const getStatusComponent = (status) => {
   switch (status) {

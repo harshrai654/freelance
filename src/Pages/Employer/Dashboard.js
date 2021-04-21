@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Row, Col, Tabs } from "antd";
-import AddProjectForm from "../Components/AddProjectForm";
-import ProjectsAdded from "../Components/ProjectsAdded";
+import AddProjectForm from "../../Components/Employer/AddProjectForm";
+import ProjectsAdded from "../../Components/Employer/ProjectsAdded";
 const { TabPane } = Tabs;
 
 const Dashboard = (props) => {
-  const { token, user, setToken } = props;
+  const { token, user, setUserData } = props;
   return (
     <Row>
       <Col span={24}>
@@ -14,7 +14,11 @@ const Dashboard = (props) => {
             <AddProjectForm token={token} user={user} />
           </TabPane>
           <TabPane tab={"Update Project"} key={1}>
-            <ProjectsAdded token={token} user={user} setToken={setToken} />
+            <ProjectsAdded
+              token={token}
+              user={user}
+              setUserData={setUserData}
+            />
           </TabPane>
         </Tabs>
       </Col>

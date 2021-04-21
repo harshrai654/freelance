@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form, Input, Button, InputNumber, Spin, Alert, Tag } from "antd";
 import { MinusCircleOutlined } from "@ant-design/icons";
-import utils from "../utils";
+import utils from "../../utils";
 
 const UpdateProject = (props) => {
   let { project, token } = props;
