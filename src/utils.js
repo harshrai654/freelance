@@ -92,6 +92,16 @@ const utils = {
             },
           }
         ),
+  getFreelancerProjects: (freelancer, token)=>
+          axios.post(
+            "/freelancers/projects/",
+            {freelancer: freelancer},
+            {
+              headers:{
+                Authorization: "Bearer "+token,
+              },
+            }
+          ),
 };
 
 export default utils;

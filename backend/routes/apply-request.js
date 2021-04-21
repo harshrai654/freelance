@@ -4,7 +4,7 @@ let ApplyRequest = require('../modles/apply-request.model')
 router.route('/create').post((req, res)=>{
     const freelancer = req.body.freelancer
     const project = req.body.project
-
+    
     const newRequest = ApplyRequest({
         freelancer: freelancer,
         project: project

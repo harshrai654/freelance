@@ -4,16 +4,16 @@ import { Row, Col } from "antd";
 import ProjectCard from "../Components/ProjectCard";
 import utils from "../utils";
 
-const ProjectsPage = (props) => {
+const FreelancerCompletedProjects = (props) => {
   const [projects, setProjects] = useState([]);
   const token = props.token ? props.token : utils.getToken();
   const freelancer = props.freelancer;
 
   useEffect(() => {
     utils
-      .fetchProjects(token)
+      .getFreelancerProjects(freelancer.id, token)
       .then((data) => {
-        setProjects(data.data.filter(proj=>proj.assigned === false));
+        setProjects(data.data.filter(proj=>proj.status==="COMPLETED"));
       })
       .catch((err) => {
         props.setToken(null);
@@ -38,4 +38,4 @@ const ProjectsPage = (props) => {
   );
 };
 
-export default ProjectsPage;
+export default FreelancerCompletedProjects;

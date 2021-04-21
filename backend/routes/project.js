@@ -51,6 +51,7 @@ router.route("/update").post((req, res) => {
   Project.findById(req.body._id)
     .then((project) => {
       project.employer = req.body.employer;
+      project.freelancer = req.body.freelancer;
       project.description = req.body.description;
       project.amount = Number(req.body.amount);
       project.deadline = Number(req.body.deadline);

@@ -6,6 +6,7 @@ import utils from "../utils";
 import ProjectsPage from "./ProjectsPage";
 import WelcomePage from "./WelcomePage";
 import Dashboard from "./Dashboard";
+import FreelancerDashboard from "./FreelancerDashboard";
 import ProjectRequests from "./ProjectRequests";
 
 const Home = () => {
@@ -32,7 +33,7 @@ const Home = () => {
             </Route>
             <Route exact path="/projects">
               {token && user.type === "freelancer" ? (
-                <ProjectsPage setToken={setToken} freelancer={user} />
+                <FreelancerDashboard token={token} setToken={setToken} user={user} />
               ) : (
                 <Redirect to="/" />
               )}

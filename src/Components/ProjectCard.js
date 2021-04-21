@@ -42,7 +42,9 @@ const ProjectCard = (props) => {
       <Collapse>
         <Panel header="Project Description" key="1">
           <p>{proj.description}</p>
+          {!proj.assigned &&
           <Button type="primary" onClick={(e)=>apply(proj._id)}>Apply</Button>
+          }
         </Panel>
       </Collapse>
     </Card>
