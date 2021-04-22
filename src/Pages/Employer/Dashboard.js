@@ -3,6 +3,7 @@ import { Row, Col, Tabs } from "antd";
 import AddProjectForm from "../../Components/Employer/AddProjectForm";
 import ProjectsAdded from "../../Components/Employer/ProjectsAdded";
 import RequestsContainer from "../../Components/Employer/RequestsContainer";
+import ProgressContainer from "../../Components/Employer/ProgressContainer";
 const { TabPane } = Tabs;
 
 const Dashboard = (props) => {
@@ -23,6 +24,13 @@ const Dashboard = (props) => {
           </TabPane>
           <TabPane tab={"Project Requests"} key={2}>
             <RequestsContainer
+              token={token}
+              user={user}
+              setUserData={setUserData}
+            />
+          </TabPane>
+          <TabPane tab={"Ongoing Projects"} key={3}>
+            <ProgressContainer
               token={token}
               user={user}
               setUserData={setUserData}
