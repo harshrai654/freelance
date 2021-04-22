@@ -16,7 +16,7 @@ const CompletedProjects = (props) => {
         setProjects(data.data.filter(proj=>proj.status==="COMPLETED"));
       })
       .catch((err) => {
-        props.setToken(null);
+        props.setUserData(null);
         setProjects(null);
       });
   }, [token, props]);

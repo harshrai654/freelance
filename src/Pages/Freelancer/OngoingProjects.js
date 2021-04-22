@@ -16,7 +16,7 @@ const OngoingProjects = (props) => {
         setProjects(data.data.filter(proj=>proj.status === "PENDING"));
       })
       .catch((err) => {
-        props.setToken(null);
+        props.setUserData(null);
         setProjects(null);
       });
   }, [token, props]);

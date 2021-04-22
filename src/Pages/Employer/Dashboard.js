@@ -21,7 +21,7 @@ const Dashboard = (props) => {
               setUserData={setUserData}
             />
           </TabPane>
-          <TabPane tab={"Requests"} key={2}>
+          <TabPane tab={"Project Requests"} key={2}>
             <RequestsContainer
               token={token}
               user={user}

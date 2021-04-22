@@ -35,7 +35,7 @@ const Home = () => {
             </Route>
             <Route exact path="/projects">
               {token && user.type === "freelancer" ? (
-                <FreelancerDashboard token={token} user={user} />
+                <FreelancerDashboard token={token} user={user} setUserData={setUserData}/>
               ) : (
                 <Redirect to="/" />
               )}
