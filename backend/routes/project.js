@@ -57,7 +57,7 @@ router.route("/update").post((req, res) => {
       project.description = req.body.description;
       project.amount = Number(req.body.amount);
       project.deadline = Number(req.body.deadline);
-
+      project.assigned = req.body.assigned;
       project
         .save()
         .then(() =>
