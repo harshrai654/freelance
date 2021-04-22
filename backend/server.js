@@ -5,6 +5,7 @@ const freelancerRouter = require('./routes/freelancer')
 const employerRouter = require('./routes/employer')
 const projectRouter = require('./routes/project')
 const applyRequestRouter = require('./routes/apply-request')
+const paymentRequestRouter = require('./routes/payment-request')
 const employerAuth = require('./validators/employer-verify-jwt')
 const freelancerAuth = require('./validators/freelancer-verify-jwt')
 
@@ -30,6 +31,7 @@ app.use('/freelancers', freelancerRouter)
 app.use('/employers', employerRouter)
 app.use('/projects', employerAuth, projectRouter)
 app.use('/apply', freelancerAuth, applyRequestRouter)
+app.use('/payment', paymentRequestRouter)
 
 app.listen(port, ()=>{
     console.log(`Server is running on port: ${port}`)
