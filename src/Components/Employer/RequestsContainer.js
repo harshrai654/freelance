@@ -28,11 +28,14 @@ const RequestsContainer = (props) => {
         projectsList &&
         projectsList.length && (
           <Collapse accordion>
-            {projectsList.map((project, index) => (
-              <Panel header={project.description} key={project._id}>
-                <RequestList project={project} token={token} user={user} />
-              </Panel>
-            ))}
+            {projectsList.map(
+              (project, index) =>
+                !project.assigned && (
+                  <Panel header={project.description} key={project._id}>
+                    <RequestList project={project} token={token} user={user} />
+                  </Panel>
+                )
+            )}
           </Collapse>
         )
       )}
