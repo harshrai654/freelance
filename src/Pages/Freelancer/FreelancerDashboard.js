@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Row, Col, Tabs } from "antd";
 import ProjectsPage from "./ProjectsPage";
-import FreelancerOngoingProjects from "./FreelancerOngoingProjects";
-import FreelancerCompletedProjects from "./FreelancerCompletedProjects";
+import FreelancerOngoingProjects from "./OngoingProjects";
+import FreelancerCompletedProjects from "./CompletedProjects";
 const { TabPane } = Tabs;
 
-const Dashboard = (props) => {
+const FreelancerDashboard = (props) => {
   const { token, user, setToken } = props;
   return (
     <Row>
@@ -26,4 +26,4 @@ const Dashboard = (props) => {
   );
 };
 
-export default Dashboard;
+export default FreelancerDashboard;

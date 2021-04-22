@@ -10,9 +10,7 @@ const ProjectCard = (props) => {
   const proj = props.proj;
   const freelancer = props.freelancer;
   const token = props.token;
-
   const apply = (projectID) => {
-    console.log(projectID, freelancer, token);
     utils
       .applyProject(projectID, freelancer, token)
       .then((response) => {
@@ -48,6 +46,12 @@ const ProjectCard = (props) => {
             onClick={(e) => apply(proj._id)}
           >
             Apply
+          </Button>
+          <Button
+            type="primary"
+            disabled={proj.freelancer !== freelancer}
+          >
+            View
           </Button>
         </Panel>
       </Collapse>

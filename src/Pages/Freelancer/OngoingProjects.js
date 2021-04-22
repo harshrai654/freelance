@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import ProjectCard from "../../Components/Freelancer/ProjectCard";
 import utils from "../../utils";
 
-const FreelancerCompletedProjects = (props) => {
+const OngoingProjects = (props) => {
   const [projects, setProjects] = useState([]);
   const token = props.token ? props.token : utils.getToken();
   const freelancer = props.freelancer;
@@ -13,7 +13,7 @@ const FreelancerCompletedProjects = (props) => {
     utils
       .getFreelancerProjects(freelancer.id, token)
       .then((data) => {
-        setProjects(data.data.filter(proj=>proj.status==="COMPLETED"));
+        setProjects(data.data.filter(proj=>proj.status === "PENDING"));
       })
       .catch((err) => {
         props.setToken(null);
@@ -38,4 +38,4 @@ const FreelancerCompletedProjects = (props) => {
   );
 };
 
-export default FreelancerCompletedProjects;
+export default OngoingProjects;
