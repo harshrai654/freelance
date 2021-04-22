@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { List, Tag } from "antd";
+import { List, Tag, Button } from "antd";
 import { Link } from "react-router-dom";
 import utils from "../../utils";
 
@@ -28,16 +28,12 @@ const RequestList = (props) => {
       renderItem={(item) => (
         <List.Item
           key={item._id}
-          actions={[<Link href="#">Know More</Link>]}
-          extra={
-            <>
-              {item.approved ? (
-                <Tag color="red">Approved</Tag>
-              ) : (
-                <Tag color="green">Pending</Tag>
-              )}
-            </>
-          }
+          actions={[
+            <Link href="#">Know More</Link>,
+            <Button onClick={() => props.selectRequest(item)}>
+              Accept Request
+            </Button>,
+          ]}
         >
           <List.Item.Meta
             title={`FreeLancer: ${item.freelancer}`}

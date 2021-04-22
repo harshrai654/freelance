@@ -73,16 +73,16 @@ const utils = {
         },
       }
     ),
-  getFreelancerProjects: (freelancer, token)=>
-          axios.post(
-            "/freelancers/projects/",
-            {freelancer: freelancer},
-            {
-              headers:{
-                Authorization: "Bearer "+token,
-              },
-            }
-          ),
+  getFreelancerProjects: (freelancer, token) =>
+    axios.post(
+      "/freelancers/projects/",
+      { freelancer: freelancer },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
 
   applyProject: (project, freelancer, token) =>
     axios.post(
@@ -106,6 +106,21 @@ const utils = {
         Authorization: "Bearer " + token,
       },
     }),
+
+  setAcceptRequest: ({ project, request, token }) => {
+    project.assigned = true;
+    project.freelancer = request.freelancer;
+    console.log(project, token);
+    return axios.post(
+      "/projects/update",
+      { ...project },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
+  },
 };
 
 export default utils;
