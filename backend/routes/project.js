@@ -12,12 +12,14 @@ router.route("/create").post((req, res) => {
   const employer = req.body.employer;
   const description = req.body.description;
   const amount = Number(req.body.amount);
+  const remainingPayment = amount;
   const deadline = Number(req.body.deadline);
 
   const newProject = Project({
     employer: employer,
     description: description,
     amount: amount,
+    remainingPayment: remainingPayment,
     deadline: deadline,
   });
 

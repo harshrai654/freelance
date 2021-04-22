@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const projectSchema = new Schema({
     employer:{type:String, required:true, trim:true},
-    freelancer: {type:String, required:true, trim:true, default:''},
+    freelancer: {type:String, required:false},
     description:{type:String, required:true, trim:true},
     amount:{type:Number, required:true, trim:true},
     remainingPayment:{type: Number, required:true, trim:true},
