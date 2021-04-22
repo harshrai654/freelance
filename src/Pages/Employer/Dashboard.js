@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Row, Col, Tabs } from "antd";
 import AddProjectForm from "../../Components/Employer/AddProjectForm";
 import ProjectsAdded from "../../Components/Employer/ProjectsAdded";
+import RequestsContainer from "../../Components/Employer/RequestsContainer";
 const { TabPane } = Tabs;
 
 const Dashboard = (props) => {
@@ -15,6 +16,13 @@ const Dashboard = (props) => {
           </TabPane>
           <TabPane tab={"Update Project"} key={1}>
             <ProjectsAdded
+              token={token}
+              user={user}
+              setUserData={setUserData}
+            />
+          </TabPane>
+          <TabPane tab={"Requests"} key={2}>
+            <RequestsContainer
               token={token}
               user={user}
               setUserData={setUserData}
