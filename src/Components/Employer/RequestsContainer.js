@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { Button, Collapse } from "antd";
 import utils from "../../utils";
-import UpdateProject from "./UpdateProject";
-
+import { Collapse } from "antd";
+import RequestList from "./RequestList";
 const { Panel } = Collapse;
 
-const ProjectsAdded = (props) => {
+const RequestsContainer = (props) => {
   const [projectsList, setProjectsList] = useState([]);
   const { token, user, setUserData } = props;
   useEffect(() => {
@@ -31,20 +30,7 @@ const ProjectsAdded = (props) => {
           <Collapse accordion>
             {projectsList.map((project, index) => (
               <Panel header={project.description} key={project._id}>
-                <UpdateProject
-                  project={project}
-                  token={token}
-                  setProject={(project) => {
-                    let newProductList = [...projectsList];
-                    newProductList[index] = project;
-                    setProjectsList(newProductList);
-                  }}
-                  deleteProject={() => {
-                    let newProductList = [...projectsList];
-                    newProductList.splice(index, 1);
-                    setProjectsList(newProductList);
-                  }}
-                />
+                <RequestList project={project} token={token} user={user} />
               </Panel>
             ))}
           </Collapse>
@@ -54,4 +40,4 @@ const ProjectsAdded = (props) => {
   );
 };
 
-export default ProjectsAdded;
+export default RequestsContainer;
