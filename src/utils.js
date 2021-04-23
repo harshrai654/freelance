@@ -62,6 +62,10 @@ const utils = {
         },
       }
     ),
+    getProject: (projectID)=>
+      axios.get(
+        "/projects/"+projectID,
+      ),
 
   updateProject: (project, token) =>
     axios.post(
@@ -83,6 +87,17 @@ const utils = {
         },
       }
     ),
+  
+    getFreelancerAppliedProjects: (freelancer, token)=>
+      axios.post(
+        "/freelancers/applications",
+        { freelancer: freelancer},
+        {
+          headers: {
+            Authorization: "Bearer "+token,
+          },
+        }
+      ),
 
   applyProject: (project, freelancer, token) =>
     axios.post(

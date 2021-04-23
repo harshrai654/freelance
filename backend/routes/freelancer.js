@@ -1,6 +1,7 @@
 const router = require('express').Router()
 let Freelancer = require('../modles/freelancer.model')
 let Projects = require('../modles/project.model')
+let ApplyRequest = require('../modles/apply-request.model')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 
@@ -15,6 +16,14 @@ router.route('/projects').post((req, res)=>{
     Projects.find({freelancer: freelancer})
         .then(projects=>res.json(projects))
         .catch(err=>res.status(400).json({error: err}));
+})
+
+
+router.route('/applications').post((req, res)=>{
+    const freelancer = req.body.freelancer;
+    ApplyRequest.find({freelancer: freelancer})
+        .then(requests => res.json({error: null, data: requests}))
+        .catch(err=>res.status(400).json({error: err}))
 })
 
 router.route('/register').post((req, res)=>{

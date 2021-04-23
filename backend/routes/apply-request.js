@@ -15,8 +15,15 @@ router.route('/create').post((req, res)=>{
         .catch(err=>res.status(400).json({error: err}))
 })
 
+
 router.route('/:id').get((req, res)=>{
-    ApplyRequest.find({project: req.params.id})
+    ApplyRequest.find(req.params.id)
+        .then(request => res.json({error: null, data: request}))
+        .catch(err=>res.status(400).json({error: err}))
+})
+
+router.route('/project/:id').get((req, res)=>{
+    ApplyRequest.find({project: req.params.project})
         .then(requests => res.json({error: null, data: requests}))
         .catch(err=>res.status(400).json({error: err}))
 })

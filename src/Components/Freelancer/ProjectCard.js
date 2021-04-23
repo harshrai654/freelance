@@ -9,6 +9,7 @@ import { useState } from "react";
 const { Panel } = Collapse;
 const ProjectCard = (props) => {
   const proj = props.proj;
+  console.log(proj)
   const freelancer = props.freelancer;
   const token = props.token;
   const [successAlert, setSuccessAlert] = useState(-1);
@@ -61,10 +62,10 @@ const ProjectCard = (props) => {
           <p>{proj.description}</p>
           <Button
             type="primary"
-            disabled={proj.assigned}
+            disabled={proj.assigned || props.applied}
             onClick={(e) => apply(proj._id)}
           >
-            Apply
+            {props.applied?"Applied":"Apply"}
           </Button>
           <Button type="primary" disabled={proj.freelancer !== freelancer}>
             View
