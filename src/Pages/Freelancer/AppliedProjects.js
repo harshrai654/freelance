@@ -26,8 +26,19 @@ const AppliedProjects = (props) => {
       {projects && Array.isArray(projects) ? (
         <Row>
           <Col span={24}>
-            {projects.map((proj) => (
-              <ProjectCard proj={proj} applied={true} freelancer={freelancer.id} token={token} key={proj._id} />
+            {projects.map((proj, index) => (
+              <ProjectCard
+                proj={proj}
+                applied={true}
+                freelancer={freelancer.id}
+                deleteRequest={() => {
+                  let newProductList = [...projects];
+                  newProductList.splice(index, 1);
+                  setProjects(newProductList);
+                }}
+                token={token}
+                key={proj._id}
+              />
             ))}
           </Col>
         </Row>

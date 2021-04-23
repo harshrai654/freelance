@@ -62,10 +62,12 @@ const utils = {
         },
       }
     ),
-    getProject: (projectID)=>
-      axios.get(
-        "/projects/"+projectID,
-      ),
+  getProject: (projectID, token) =>
+    axios.get("/projects/" + projectID, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }),
 
   updateProject: (project, token) =>
     axios.post(
@@ -87,17 +89,17 @@ const utils = {
         },
       }
     ),
-  
-    getFreelancerAppliedProjects: (freelancer, token)=>
-      axios.post(
-        "/freelancers/applications",
-        { freelancer: freelancer},
-        {
-          headers: {
-            Authorization: "Bearer "+token,
-          },
-        }
-      ),
+
+  getFreelancerAppliedProjects: (freelancer, token) =>
+    axios.post(
+      "/freelancers/applications",
+      { freelancer: freelancer },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ),
 
   applyProject: (project, freelancer, token) =>
     axios.post(
@@ -136,6 +138,13 @@ const utils = {
       }
     );
   },
+
+  deleteApplyRequest: (request, token) =>
+    axios.delete(`/apply/${request._id}`, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }),
 };
 
 export default utils;

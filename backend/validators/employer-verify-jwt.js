@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const regex = new RegExp("/project/(.)*");
+  const regex = new RegExp("/projects/(.)*");
   if (req.originalUrl === "/projects" || regex.test(req.originalUrl) === true) {
     return next();
   }

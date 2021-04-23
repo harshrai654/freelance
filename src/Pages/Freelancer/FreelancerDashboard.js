@@ -17,13 +17,22 @@ const FreelancerDashboard = (props) => {
             <ProjectsPage setUserData={setUserData} freelancer={user} />
           </TabPane>
           <TabPane tab={"Ongoing Projects"} key={1}>
-            <FreelancerOngoingProjects setUserData={setUserData} freelancer={user} />
+            <FreelancerOngoingProjects
+              setUserData={setUserData}
+              freelancer={user}
+            />
           </TabPane>
           <TabPane tab={"Completed Projects"} key={2}>
-            <FreelancerCompletedProjects setUserData={setUserData} freelancer={user} />
+            <FreelancerCompletedProjects
+              setUserData={setUserData}
+              freelancer={user}
+            />
           </TabPane>
-          <TabPane tab={"Applied Projects"} key={3}>
-            <FreelancerAppliedProjects setUserData={setUserData} freelancer={user} />
+          <TabPane tab={"Apply Requests"} key={3}>
+            <FreelancerAppliedProjects
+              setUserData={setUserData}
+              freelancer={user}
+            />
           </TabPane>
         </Tabs>
       </Col>
