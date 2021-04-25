@@ -1,11 +1,21 @@
-import { Card, Tag, Collapse, Button, Alert, Modal, Spin } from "antd";
+import {
+  Card,
+  Tag,
+  Collapse,
+  Button,
+  Alert,
+  Modal,
+  Spin,
+  Row,
+  Col,
+} from "antd";
 import {
   ExclamationCircleOutlined,
   CheckCircleOutlined,
 } from "@ant-design/icons";
 import utils from "../../utils";
 import { useEffect, useState } from "react";
-
+import PaymentRequestForm from "./PaymentRequestForm";
 const { confirm } = Modal;
 const { Panel } = Collapse;
 const ProjectCard = (props) => {
@@ -14,7 +24,7 @@ const ProjectCard = (props) => {
   const [successAlert, setSuccessAlert] = useState(-1);
   const [loading, setLoading] = useState(-1);
   const [proj, setProj] = useState(props.proj);
-
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
   const apply = (projectID) => {
     utils
       .applyProject(projectID, freelancer, token)
@@ -119,15 +129,37 @@ const ProjectCard = (props) => {
                 </Button>
               )
             ) : (
-              <Button
-                type="primary"
-                disabled={proj.assigned || successAlert === 1}
-                onClick={(e) => apply(proj._id)}
-              >
-                {props.applied ? "Applied" : "Apply"}
-              </Button>
+              <>
+                {proj.assigned ? (
+                  <Row>
+                    <Col span={4}>
+                      <Button
+                        type="primary"
+                        onClick={() => setShowPaymentForm(true)}
+                      >
+                        Payment Request
+                      </Button>
+                    </Col>
+                    <Col span={8}>
+                      <Button type="primary">Request Notification</Button>
+                    </Col>
+                  </Row>
+                ) : (
+                  <Button
+                    type="primary"
+                    disabled={proj.assigned || successAlert === 1}
+                    onClick={(e) => apply(proj._id)}
+                  >
+                    {props.applied ? "Applied" : "Apply"}
+                  </Button>
+                )}
+              </>
             )}
           </Panel>
+          <PaymentRequestForm
+            showPaymentForm={showPaymentForm}
+            handleClose={() => setShowPaymentForm(false)}
+          />
         </Collapse>
       </Card>
     </>
